@@ -1,0 +1,96 @@
+float a=15;
+float b=15;
+float c=1;
+float d=2;
+int rezultat=0;
+int nivo=120;
+int zhivot=3;
+int gameState = 1;
+
+void setup() {
+  size(500, 700);
+
+  reset();
+}
+
+void reset() {
+  zhivot = 3;
+  rezultat = 0;
+  a=15;
+  b=15;
+  c=1;
+  d=2;
+}
+
+
+void draw() {
+
+  frameRate(nivo);
+  background(238, 204, 234);
+  noStroke();
+  fill(5, 4, 70);
+  ellipse(a=a+c, b=b+d, 20, 20);
+  fill(random(0, 255), random(0, 255), random(0, 255));
+  rect (mouseX-40, 550, 80, 10);
+  fill(5, 4, 70);
+  text(rezultat, 120, 40);
+  text(zhivot, 350, 40);
+  textSize(22);
+  fill(103, 0, 46);
+  text("SCORE :", 15, 40, -30);  
+  text("LIFE :", 270, 40);  
+
+  if (b>=height) {
+
+      a=15;
+      b=15;
+      zhivot=zhivot-1;
+      nivo=120;
+      if (zhivot <= 0) {
+        zhivot = 0;
+      }
+    }
+  
+
+  if (a>width) {
+    c=-1;
+  }
+  if (a<0) {
+    c=1;
+  }
+  if (b<0) {
+    d=2;
+  }
+  if (dist(a, b, mouseX, 550)<40 && b>540) {
+    d=-2;
+    nivo=nivo+10;
+    rezultat=rezultat+5;
+  }
+  if (zhivot<0) {
+  }
+  if (zhivot == 0) {
+    gameOver();
+  }
+
+  if (rezultat >= 120) {
+    background(255);
+    textSize(40);
+    fill(0);
+    text("CONGRATULATIONS", 50, 300);
+    textSize(30);
+    text("Press 'R' to play again ", 50, 350);
+    if (keyPressed && key == 'r') {
+      reset();
+    }
+  }
+}
+
+void gameOver() {
+  background(255);
+  textSize(30);
+  fill(0);
+  text("Press 'R' to play again ", 75, 350);
+  if (keyPressed && key == 'r') {
+    reset();
+  }
+}
